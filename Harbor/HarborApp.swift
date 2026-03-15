@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct HarborApp: App {
     @State private var router = AppRouter()
-    private let container = DependencyContainer()
+    @State private var container = DependencyContainer()
 
     var body: some Scene {
         WindowGroup {
