@@ -39,7 +39,7 @@ struct AccountCardView: View {
                 .foregroundStyle(balanceColor)
                 .lineLimit(1)
 
-            Text(displayType)
+            Text(account.type.displayName)
                 .font(Typography.caption)
                 .foregroundStyle(ColorTokens.labelSecondary)
         }
@@ -52,11 +52,7 @@ struct AccountCardView: View {
     // MARK: - Computed Helpers
 
     private var formattedBalance: String {
-        let major = Double(account.balance) / 100.0
-        let formatted = major.formatted(
-            .number.grouping(.automatic).precision(.fractionLength(2))
-        )
-        return "\(formatted) \(account.currency)"
+        MoneyFormatter.format(amount: account.balance, currency: account.currency)
     }
 
     private var balanceColor: Color {
@@ -84,17 +80,6 @@ struct AccountCardView: View {
         case .loan: return ColorTokens.negative
         case .insurance: return ColorTokens.neutral
         case .general: return ColorTokens.labelSecondary
-        }
-    }
-
-    private var displayType: String {
-        switch account.type {
-        case .cash: return "Cash"
-        case .bank: return "Bank"
-        case .creditCard: return "Credit Card"
-        case .loan: return "Loan"
-        case .insurance: return "Insurance"
-        case .general: return "General"
         }
     }
 }
