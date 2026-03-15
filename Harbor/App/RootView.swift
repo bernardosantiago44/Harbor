@@ -3,6 +3,7 @@ import SwiftUI
 /// Root container view. Owns the NavigationStack and resolves routes.
 struct RootView: View {
     @Environment(AppRouter.self) private var router
+    @Environment(DependencyContainer.self) private var container
     
     var body: some View {
         @Bindable var bindableRouter = router
@@ -13,7 +14,7 @@ struct RootView: View {
                 }
             }
             .navigationDestination(for: AppRoute.self) { route in
-                bindableRouter.view(for: route)
+                bindableRouter.view(for: route, container: container)
             }
         }
     }

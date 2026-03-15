@@ -4,6 +4,9 @@ import Foundation
 /// Views must never directly instantiate repositories or services.
 @Observable
 final class DependencyContainer {
-    // Repositories and services will be registered here as features are developed.
-    // Example: let accountRepository: AccountRepositoryProtocol = AccountRepository()
+    let accountsRepository: IAccountsRepository
+
+    init(accountsRepository: IAccountsRepository = AccountsRepository()) {
+        self.accountsRepository = accountsRepository
+    }
 }
