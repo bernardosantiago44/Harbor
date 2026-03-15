@@ -9,9 +9,14 @@ import SwiftUI
 
 @main
 struct HarborApp: App {
+    @State private var router = AppRouter()
+    private let container = DependencyContainer()
+
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
+                .environment(router)
+                .environment(container)
         }
     }
 }
