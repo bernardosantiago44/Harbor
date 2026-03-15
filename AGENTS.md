@@ -1,14 +1,12 @@
 ## What this app does
-Harbor is a premium, calm, simplicity-first personal finance iOS app.  
+Harbor is a premium, calm, simplicity-first personal finance iOS app.
+
 It helps users track accounts, records, budgets, and reports with a minimal UX, while using a rigorous internal financial model underneath.
 
 The app is:
 - SwiftUI-first
-- UIKit only for specialized interactive components
 - modular and highly testable
 - built around Ledger, Currency, and Semantic Command core engines
-
----
 
 ## Bounded Context
 This repository is for the Harbor iOS application only.
@@ -21,8 +19,6 @@ Main bounded contexts:
 - **Budgets**: category budgets with weekly, biweekly, or monthly periods
 - **Reports**: read models and summaries derived from financial truth
 - **Semantic Bar**: centralized command/search/draft-entry interaction layer
-
----
 
 ## Key concepts for AI to understand
 - **Account**: a financial container or obligation with one base currency
@@ -39,24 +35,17 @@ Main bounded contexts:
 Important principle:
 - **Keep UX simple, but keep domain logic rigorous**
 
----
-
 ## Before Making Changes
-Read .github/copilot-instructions.md in full.
+Read `.github/copilot-instructions.md` in full.
 
----
-
-## When working in this folder, AI should
+## When working in this repository, AI should
 - make small, focused changes
 - keep business logic in Domain
 - keep UI code thin
-- use protocol-based abstractions where applicable
 - reuse existing models, services, and patterns before creating new ones
 - keep modules loosely coupled
 - document assumptions if something is ambiguous
 - surface any mismatch between implementation and project documents
-
----
 
 ## What AI should NOT do here
 - Do **not** put business logic in SwiftUI views
@@ -69,20 +58,14 @@ Read .github/copilot-instructions.md in full.
 - Do **not** expand MVP scope unless explicitly requested
 - Do **not** silently change domain concepts or financial behavior
 
----
-
 ## Related files to always check before editing
 Always review these before making important changes:
-
 - the feature folder being edited
 - shared Core domain services and repository protocols
 - any existing models or use cases related to the change
 
----
-
 ## Bug Fixes
 When fixing a bug, AI should:
-
 1. Write a failing test that reproduces it
 2. Confirm the test fails before attempting any fix
 3. Fix the bug
@@ -91,8 +74,6 @@ When fixing a bug, AI should:
 For financial bugs:
 - verify whether Ledger, Currency, or record-mapping logic is affected
 - never patch around financial inconsistencies in the UI only
-
----
 
 ## Documentation mismatch
 If implementation reveals that project documents are outdated or inconsistent, create an update request with:
