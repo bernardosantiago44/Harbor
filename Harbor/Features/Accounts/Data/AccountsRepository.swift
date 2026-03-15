@@ -2,7 +2,7 @@ import Foundation
 import Supabase
 
 /// Supabase-backed implementation of ``AccountsRepository``.
-final class AccountsRepositoryImpl: AccountsRepository {
+final class AccountsRepository: IAccountsRepository {
 
     private let client: SupabaseClient
     private let table = "accounts"
