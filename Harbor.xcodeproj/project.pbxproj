@@ -45,7 +45,6 @@
 				Core/Data/.gitkeep,
 				Core/Infrastructure/.gitkeep,
 				Core/Utilities/.gitkeep,
-				Features/Accounts/.gitkeep,
 				Features/Budgets/.gitkeep,
 				Features/Categories/.gitkeep,
 				Features/Records/.gitkeep,
