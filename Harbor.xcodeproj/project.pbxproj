@@ -6,6 +6,14 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D17B410C2F6632130046DB9A /* Algorithms in Frameworks */ = {isa = PBXBuildFile; productRef = D17B410B2F6632130046DB9A /* Algorithms */; };
+		D17B410F2F6632550046DB9A /* Logging in Frameworks */ = {isa = PBXBuildFile; productRef = D17B410E2F6632550046DB9A /* Logging */; };
+		D17B41122F6632780046DB9A /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = D17B41112F6632780046DB9A /* Auth */; };
+		D17B41142F6632780046DB9A /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = D17B41132F6632780046DB9A /* Functions */; };
+		D17B41162F6632780046DB9A /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = D17B41152F6632780046DB9A /* PostgREST */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		D17B40E12F662F4E0046DB9A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +60,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D17B410F2F6632550046DB9A /* Logging in Frameworks */,
+				D17B410C2F6632130046DB9A /* Algorithms in Frameworks */,
+				D17B41142F6632780046DB9A /* Functions in Frameworks */,
+				D17B41122F6632780046DB9A /* Auth in Frameworks */,
+				D17B41162F6632780046DB9A /* PostgREST in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +125,11 @@
 			);
 			name = Harbor;
 			packageProductDependencies = (
+				D17B410B2F6632130046DB9A /* Algorithms */,
+				D17B410E2F6632550046DB9A /* Logging */,
+				D17B41112F6632780046DB9A /* Auth */,
+				D17B41132F6632780046DB9A /* Functions */,
+				D17B41152F6632780046DB9A /* PostgREST */,
 			);
 			productName = Harbor;
 			productReference = D17B40D32F662F4D0046DB9A /* Harbor.app */;
@@ -195,6 +213,11 @@
 			);
 			mainGroup = D17B40CA2F662F4D0046DB9A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D17B410A2F6632130046DB9A /* XCRemoteSwiftPackageReference "swift-algorithms" */,
+				D17B410D2F6632550046DB9A /* XCRemoteSwiftPackageReference "swift-log" */,
+				D17B41102F6632780046DB9A /* XCRemoteSwiftPackageReference "supabase-swift" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D17B40D42F662F4D0046DB9A /* Products */;
 			projectDirPath = "";
@@ -400,11 +423,13 @@
 				DEVELOPMENT_TEAM = GRQM76566V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Harbor;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -432,11 +457,13 @@
 				DEVELOPMENT_TEAM = GRQM76566V;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Harbor;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 18.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -578,6 +605,61 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D17B410A2F6632130046DB9A /* XCRemoteSwiftPackageReference "swift-algorithms" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-algorithms.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.2.1;
+			};
+		};
+		D17B410D2F6632550046DB9A /* XCRemoteSwiftPackageReference "swift-log" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-log";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.10.1;
+			};
+		};
+		D17B41102F6632780046DB9A /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/supabase/supabase-swift";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.5.1;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D17B410B2F6632130046DB9A /* Algorithms */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D17B410A2F6632130046DB9A /* XCRemoteSwiftPackageReference "swift-algorithms" */;
+			productName = Algorithms;
+		};
+		D17B410E2F6632550046DB9A /* Logging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D17B410D2F6632550046DB9A /* XCRemoteSwiftPackageReference "swift-log" */;
+			productName = Logging;
+		};
+		D17B41112F6632780046DB9A /* Auth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D17B41102F6632780046DB9A /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Auth;
+		};
+		D17B41132F6632780046DB9A /* Functions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D17B41102F6632780046DB9A /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = Functions;
+		};
+		D17B41152F6632780046DB9A /* PostgREST */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D17B41102F6632780046DB9A /* XCRemoteSwiftPackageReference "supabase-swift" */;
+			productName = PostgREST;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D17B40CB2F662F4D0046DB9A /* Project object */;
 }
