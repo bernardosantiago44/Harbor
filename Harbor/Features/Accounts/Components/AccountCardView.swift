@@ -3,10 +3,15 @@ import SwiftUI
 /// A card displaying an account's name, balance, type, and tracking status.
 /// Used inside the accounts grid on the main Accounts screen.
 struct AccountCardView: View {
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
     let account: AccountSummary
+    
+    var internalPadding: CGFloat {
+        return dynamicTypeSize < .xxLarge ? Spacing.sm : Spacing.md
+    }
 
     var body: some View {
-        VStack(alignment: .leading, spacing: Spacing.sm) {
+        VStack(alignment: .leading, spacing: Spacing.xxs) {
             HStack {
                 Image(systemName: iconName)
                     .font(.title3)
@@ -27,24 +32,20 @@ struct AccountCardView: View {
                 }
             }
 
-            Spacer()
-
             Text(account.name)
-                .font(Typography.headline)
+                .font(Typography.subheadline)
+                .fontWeight(.semibold)
                 .foregroundStyle(ColorTokens.labelPrimary)
                 .lineLimit(1)
 
             Text(formattedBalance)
-                .font(Typography.title3)
+                .font(Typography.headline)
                 .foregroundStyle(balanceColor)
                 .lineLimit(1)
-
-            Text(account.type.displayName)
-                .font(Typography.caption)
-                .foregroundStyle(ColorTokens.labelSecondary)
         }
-        .padding(Spacing.md)
+        .padding(internalPadding)
         .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxHeight: .infinity)
         .background(ColorTokens.backgroundSecondary)
         .clipShape(RoundedRectangle(cornerRadius: Radius.lg))
     }
@@ -91,8 +92,19 @@ struct AccountCardView: View {
         type: .bank,
         currency: "USD",
         balance: 245_00,
-        isTracked: true
+        isTracked: false
     ))
-    .frame(width: 180, height: 160)
+//    .frame(width: 180, height: 160)
     .padding()
+}
+
+#Preview("Accounts List") {
+    @Previewable @State var router = AppRouter()
+
+    NavigationStack {
+        AccountsView(viewModel: AccountsViewModel(
+            repository: PreviewAccountsRepository()
+        ))
+    }
+    .environment(router)
 }

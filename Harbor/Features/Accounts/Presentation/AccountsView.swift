@@ -3,37 +3,49 @@ import SwiftUI
 /// Main Accounts screen displaying all user accounts in a 2-row horizontal paging grid.
 struct AccountsView: View {
     @Environment(AppRouter.self) private var router
+    @Environment(\.horizontalSizeClass) private var horizontalSizeClass
+    @Environment(\.dynamicTypeSize) private var dynamicTypeSize
+    
     let viewModel: AccountsViewModel
 
-    private let rows = [
-        GridItem(.flexible(), spacing: Spacing.sm),
-        GridItem(.flexible(), spacing: Spacing.sm),
-    ]
+    private var rows: [GridItem] {
+        generateGridLayout()
+    }
+    
+    private var GridColumns: Int {
+        dynamicTypeSize <= .xxxLarge ? 2 : 1
+    }
+    
+    private var AccountsGridContainerPadding: CGFloat {
+        return dynamicTypeSize <= .xxxLarge ? Spacing.sm : Spacing.xl
+    }
 
     var body: some View {
-        Group {
-            switch viewModel.state {
-            case .loading:
-                LoadingStateView(message: "Loading accounts…")
-
-            case .loaded(let accounts):
-                accountsGrid(accounts)
-
-            case .empty:
-                EmptyStateView(
-                    icon: "tray",
-                    title: "No accounts yet",
-                    message: "Add your first account to start tracking your finances."
-                )
-
-            case .error(let displayableError):
-                ErrorStateView(message: displayableError.message) {
-                    Task { await viewModel.loadAccounts() }
+        ScrollView {
+            Group {
+                switch viewModel.state {
+                case .loading:
+                    LoadingStateView(message: "Loading accounts…")
+                    
+                case .loaded(let accounts):
+                    accountsGrid(accounts)
+                    
+                case .empty:
+                    EmptyStateView(
+                        icon: "tray",
+                        title: "No accounts yet",
+                        message: "Add your first account to start tracking your finances."
+                    )
+                    
+                case .error(let displayableError):
+                    ErrorStateView(message: displayableError.message) {
+                        Task { await viewModel.loadAccounts() }
+                    }
                 }
             }
+            .navigationTitle("Accounts")
+            .task { await viewModel.loadAccounts() }
         }
-        .navigationTitle("Accounts")
-        .task { await viewModel.loadAccounts() }
     }
 
     // MARK: - Subviews
@@ -41,25 +53,46 @@ struct AccountsView: View {
     @ViewBuilder
     private func accountsGrid(_ accounts: [AccountSummary]) -> some View {
         ScrollView(.horizontal) {
-            LazyHGrid(rows: rows, spacing: Spacing.sm) {
+            LazyHGrid(rows: rows) {
                 ForEach(accounts) { account in
-                    AccountCardView(account: account)
-                        .containerRelativeFrame(
-                            .horizontal,
-                            count: 2,
-                            spacing: Spacing.sm
-                        )
-                        .onTapGesture {
-                            router.navigate(to: .accountDetail(id: account.id))
-                        }
+                    Button {
+                        router.navigate(to: .accountDetail(id: account.id))
+                    } label: {
+                        AccountCardView(account: account)
+                            .containerRelativeFrame(
+                                .horizontal,
+                                count: GridColumns,
+                                spacing: Spacing.sm
+                            )
+                    }
                 }
             }
             .scrollTargetLayout()
-            .padding(.horizontal, Spacing.md)
-            .padding(.vertical, Spacing.sm)
         }
+        .contentMargins(.horizontal, AccountsGridContainerPadding, for: .scrollContent)
         .scrollTargetBehavior(.viewAligned)
-        .scrollIndicators(.hidden)
+        .defaultScrollAnchor(.leading)
+    }
+    
+    // MARK: - Functions
+    
+    private func generateGridLayout() -> [GridItem] {
+        // Limit multicolumn slideshow to
+        // font size of up to XXXL,
+        // or to wide screens only
+        if dynamicTypeSize <= .xxxLarge || horizontalSizeClass == .regular {
+            // Show two rows in the grid
+            /*
+             * [X X X]
+             * [X X X]
+             */
+            return Array(repeating: GridItem(.flexible(), spacing: 8), count: 2)
+        }
+        // Show one row in the grid
+        /*
+         * [X X X]
+         */
+        return [ GridItem(.flexible(), spacing: 8) ]
     }
 }
 
@@ -77,7 +110,7 @@ struct AccountsView: View {
 // MARK: - Preview Helpers
 
 /// An in-memory repository used only for SwiftUI previews.
-private struct PreviewAccountsRepository: IAccountsRepository {
+ struct PreviewAccountsRepository: IAccountsRepository {
     func getAccounts() async throws -> [AccountSummary] {
         [
             AccountSummary(id: UUID(), name: "Checking", type: .bank, currency: "USD", balance: 1_250_00, isTracked: true),
