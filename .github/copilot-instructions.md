@@ -155,6 +155,15 @@ Avoid:
 * callback pyramids
 * Combine unless required for streaming behavior
 
+# Accesibility
+
+When building user interfaces, always consider accesibility:
+
+- Localization and internationalization
+- Vision (dynamic type sizes, paddings)
+- Optimize the app’s UI for Assistive Access
+- Consider gender-specific or neutral labels and plurals
+
 # Data Handling
 
 ## Money Representation
