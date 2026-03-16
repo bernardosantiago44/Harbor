@@ -20,12 +20,14 @@ final class AppRouter {
     }
 
     @ViewBuilder
-    func view(for route: AppRoute) -> some View {
+    func view(for route: AppRoute, container: DependencyContainer) -> some View {
         switch route {
         case .accounts:
-            Text("Accounts")
+            AccountsView(viewModel: AccountsViewModel(
+                repository: container.accountsRepository
+            ))
         case .accountDetail(let id):
-            Text("Account \(id.uuidString)")
+            AccountDetailView(accountId: id)
         case .createAccount:
             Text("Create Account")
         case .editAccount(let id):
