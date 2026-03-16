@@ -27,11 +27,25 @@ final class AppRouter {
                 repository: container.accountsRepository
             ))
         case .accountDetail(let id):
-            AccountDetailView(accountId: id)
+            AccountDetailView(
+                viewModel: AccountDetailViewModel(
+                    accountId: id,
+                    repository: container.accountsRepository
+                )
+            )
         case .createAccount:
-            Text("Create Account")
+            CreateAccountView(
+                viewModel: CreateAccountViewModel(
+                    repository: container.accountsRepository
+                )
+            )
         case .editAccount(let id):
-            Text("Edit Account \(id.uuidString)")
+            EditAccountView(
+                viewModel: EditAccountViewModel(
+                    accountId: id,
+                    repository: container.accountsRepository
+                )
+            )
         }
     }
 }
